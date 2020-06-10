@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block title %}New Expense{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item">Add a New Expense</li>
+{% endblock %}
+
+{% block content %}
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% include 'includes/form.html' %}
+    <button type="submit" class="btn btn-success mb-4">Submit</button>
+  </form>
+{% endblock %}

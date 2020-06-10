@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}View Expense{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/simplemde.min.css' %}">
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/simplemde.min.js' %}"></script>
+<script>
+  var simplemde = new SimpleMDE();
+</script>
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'view_expenses' %}">Expenses</a></li>
+<li class="breadcrumb-item">View {{ expense.expense }}</a></li>
+{% endblock %}
+
+{% block content %}
+
+
+<dl class="row ">
+  <dt class="col-sm-3">Expense</dt>
+  <dd class="col-sm-9">{{ expense.expense }}</dd>
+
+  <dt class="col-sm-3">Amount</dt>
+  <dd class="col-sm-9">{{ expense.amount }}</dd>
+
+  <dt class="col-sm-3">Purchaser</dt>
+  <dd class="col-sm-9">{{ expense.purchaser }}</dd>
+
+  <dt class="col-sm-3">Paid</dt>
+  <dd class="col-sm-9">{{ expense.paid }}</dd>
+
+</dl>
+
+<a href="{% url 'edit_expense' expense.pk %}" class="btn btn-outline-primary mr-2 mb-2">Edit</a>
+
+{% if not expense.paid %}
+<a href="{% url 'pay_expense' expense.pk %}" class="btn btn-success mb-2">Pay</a>
+{% endif %}
+
+
+<button class="btn btn-danger float-right" data-toggle="modal" data-target="#fm-modal-grid">Delete</button>
+<div class="modal fade" id="fm-modal-grid" tabindex="-1" role="dialog" aria-labelledBy="fm-modal-grid"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Delete Expense</h5>
+        <button class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <p>Are you sure you want to delete {{ expense.expense }}?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <form action="{% url 'expense_remove' pk=expense.pk %}" method="POST">
+          {% csrf_token %}
+          <button class="btn btn-outline-danger">Delete</button>
+        </form>
+        <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

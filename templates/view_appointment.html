@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}View Appointment{% endblock %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/simplemde.min.css' %}">
+  
+{% endblock %}
+
+{% block javascript %}
+  <script src="{% static 'js/simplemde.min.js' %}"></script>
+  <script>
+    var simplemde = new SimpleMDE();
+  </script>
+{% endblock %}
+
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'view_appointments' %}">Appointments</a></li>
+  <li class="breadcrumb-item">View {{ appointment.name }}'s Appointment</a></li>
+{% endblock %}
+
+{% block content %}
+
+
+<dl class="row ">
+  <dt class="col-sm-3">Name</dt>
+  <dd class="col-sm-9">{{ appointment.name }}</dd>
+
+  <dt class="col-sm-3">Email</dt>
+  <dd class="col-sm-9">{{ appointment.email }}</dd>
+  
+  <dt class="col-sm-3">Phone</dt>
+  <dd class="col-sm-9">{{ appointment.phone }}</dd>
+
+  <dt class="col-sm-3">Address</dt>
+  <dd class="col-sm-9">{{ appointment.address }}</dd>
+
+  <dt class="col-sm-3">Cubic Yards</dt>
+  <dd class="col-sm-9">{{ appointment.cubic_yards }}</dd>
+
+  <dt class="col-sm-3">Weeding</dt>
+  <dd class="col-sm-9">{% if appointment.weeding is True %}Weeding{% else %}No Weeding{% endif %}</dd>
+
+  <dt class="col-sm-3">Edging</dt>
+  <dd class="col-sm-9">{% if appointment.edging is True %}Edging{% else %}No Edging{% endif %}</dd>
+
+  <dt class="col-sm-3">Delivery</dt>
+  <dd class="col-sm-9">{{ appointment.get_delivery_display }}</dd>
+
+  <dt class="col-sm-3">Date</dt>
+  <dd class="col-sm-9">{{ appointment.date }}</dd>
+
+  <dt class="col-sm-3">Status</dt>
+  <dd class="col-sm-9">{{ appointment.get_status_display }}</dd>
+
+  <dt class="col-sm-3">Cost</dt>
+  <dd class="col-sm-9">{{ appointment.cost }}</dd>
+
+  <dt class="col-sm-3">Hear About Us</dt>
+  <dd class="col-sm-9">{{ appointment.hear_about_us }}</dd>
+
+  <dt class="col-sm-3">Comments</dt>
+  <dd class="col-sm-9">{{ appointment.additional_comments }}</dd>  
+</dl>
+
+<a href="{% url 'edit_appointment' appointment.pk %}" class="btn btn-outline-primary mr-2 mb-2">Edit</a>
+
+{% if appointment.get_status_display == 'Pending' %}
+<a href="{% url 'confirm_appointment' appointment.pk %}" class="btn btn-primary mb-2">Confirm</a>
+{% elif appointment.get_status_display == 'Scheduled' %}
+<a href="{% url 'complete_appointment' appointment.pk %}" class="btn btn-success mb-2">Complete</a>
+{% endif %}
+
+
+<button class="btn btn-danger float-right" data-toggle="modal" data-target="#fm-modal-grid">Delete</button>
+<div class="modal fade" id="fm-modal-grid" tabindex="-1" role="dialog" aria-labelledBy="fm-modal-grid"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Delete Appointment</h5>
+        <button class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <p>Are you sure you want to delete {{ appointment.name }}'s apppointment?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <form action="{% url 'appointment_remove' pk=appointment.pk %}" method="POST">
+          {% csrf_token %}
+          <button class="btn btn-outline-danger">Delete</button>
+        </form>
+        <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

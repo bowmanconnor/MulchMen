@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load widget_tweaks static %}
+{% block title %}Schedule a New Appointment{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item">Add a New Appointment</li>
+{% endblock %}
+
+
+
+{% block content %}
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% include 'includes/form.html' %}
+    <button type="submit" class="btn btn-success mb-4">Submit</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% load static %}
+{% block stylesheet %}<link rel="stylesheet" href="{% static 'css/card.css' %}">{% endblock %}
+<aside class="profile-card">
+    <div class="vertical-center">
+        <div class="mask-shadow"></div>
+        <header>
+                <a> 
+                    <img src="{% static 'images/{{photo}}' %}">
+                </a>
+                <h1>{{ name }}</h1>
+                <h2>{{ school }}</h2> 
+            </header>
+            <div class="profile-bio">  
+                    <p>{{ bio }}</p>  
+            </div>
+    </div>
+</aside>

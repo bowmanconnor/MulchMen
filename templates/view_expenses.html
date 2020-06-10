@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% load static %}
+
+{% block title %}All Expenses{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item">Expenses</li>
+{% endblock %}
+
+{% block content %}
+
+
+<table class="table mb-4">
+    <thead class="thead-inverse">
+      <tr class="table-warning">
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Purchaser</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for expense in expenses %}
+      {% if not expense.paid %}
+        <tr>
+          <td>{{ expense.expense }}</td>
+          <td>{{ expense.amount }}</td>
+          <td>{{ expense.purchaser }}</td>
+          <td><a href="{% url 'view_expense' expense.pk %}" class="btn btn-outline-primary">View</a></td>
+
+          <td></td>
+        </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+<table class="table mb-4">
+    <thead class="thead-inverse">
+      <tr class="table-success">
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Purchaser</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for expense in expenses %}
+      {% if expense.paid %}
+      
+        <tr>
+          <td>{{ expense.expense }}</td>
+          <td>{{ expense.amount }}</td>
+          <td>{{ expense.purchaser }}</td>
+          <td><a href="{% url 'view_expense' expense.pk %}" class="btn btn-outline-primary">View</a></td>
+
+          <td></td>
+        </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+<div class="mb-4">
+      <a href="{% url 'new_expense' %}" class="btn btn-primary">New expense</a>
+    </div>
+
+{% endblock %}
+

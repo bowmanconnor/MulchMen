@@ -1,0 +1,33 @@
+{% extends 'base_accounts.html' %}
+
+{% block title %}Sign up to MulchMen{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+      <div class="col text-center">
+          <a href="{% url 'social:begin' 'facebook' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="fb connect mb-3">Continue with Facebook</a>
+          <p class="mb-3">or</p> 
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12 ml-4 mr-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Sign up</h3>
+          <div class="container">
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include 'includes/form.html' %}
+            <button type="submit" class="btn btn-primary btn-block mb-3">Create an account</button>
+          </form>
+        </div>
+        <div class="card-footer text-muted text-center">
+          Already have an account? <a href="{% url 'login' %}">Log in</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

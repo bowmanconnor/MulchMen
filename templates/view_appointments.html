@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% load static %}
+
+{% block title %}All Appointments{% endblock %}
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/hor_scroll.css' %}">
+  <link rel="stylesheet" href="{% static 'css/table.css' %}">
+
+{% endblock %}
+
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item">Appointments</li>
+{% endblock %}
+
+{% block content %}
+
+
+<table class="table mb-4">
+    <thead class="thead-inverse">
+      <tr class="table-warning">
+        <th>Name</th>
+        <th>Cubic Yards</th>
+        <th>Date Requested</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for appointment in appointments %}
+      {% if appointment.status == 'P' %}
+        <tr>
+          <td>{{ appointment.name }}</td>
+          <td>{{ appointment.cubic_yards }}</td>
+          <td>{{ appointment.date }}</td>
+          <td><a href="{% url 'view_appointment' appointment.pk %}" class="btn btn-outline-primary">View</a></td>
+
+          <td></td>
+        </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+<table class="table mb-4">
+    <thead class="thead-inverse">
+      <tr class="table-primary">
+        <th>Name</th>
+        <th>Cubic Yards</th>
+        <th>Date Confirmed</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for appointment in appointments %}
+      {% if appointment.status == 'S' %}
+        <tr>
+          <td>{{ appointment.name }}</td>
+          <td>{{ appointment.cubic_yards }}</td>
+          <td>{{ appointment.date }}</td>
+          <td><a href="{% url 'view_appointment' appointment.pk %}" class="btn btn-outline-primary">View</a></td>
+
+          <td></td>
+        </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+<table class="table mb-4">
+    <thead class="thead-inverse">
+      <tr class="table-success">
+        <th>Name</th>
+        <th>Cubic Yards</th>
+        <th>Date Completed</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for appointment in appointments %}
+      {% if appointment.status == 'C' %}
+        <tr>
+          <td>{{ appointment.name }}</td>
+          <td>{{ appointment.cubic_yards }}</td>
+          <td>{{ appointment.date }}</td>
+          <td><a href="{% url 'view_appointment' appointment.pk %}" class="btn btn-outline-primary">View</a></td>
+
+          <td></td>
+        </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+<div class="mb-4">
+      <a href="{% url 'schedule_staff' %}" class="btn btn-primary">New Appointment</a>
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/card.css' %}">{% endblock %}
+
+{% block title %}
+About Us - {{ block.super }}
+{% endblock %}
+{% block breadcrumb %}
+<li class="breadcrumb-item active">About Our Founders</li>
+{% endblock %}
+
+
+{% block content %}
+<div class='container'>
+  <span class='row justify-content-center'>
+    <div class="row">
+      <div class="col">
+        <aside class="profile-card">
+          <div class="mask-shadow" ></div>
+          <header>
+            <a>
+              <img src="{% static 'images/connor.jpeg' %}">
+            </a>
+            <h1>Connor Bowman</h1>
+            <h2>Sophmore at the College of William and Mary</h2>
+          </header>
+          <div class="profile-bio">
+            <p>"Terence is an avid reader of science fiction, especially anything to do with aliens and tweed jackets.
+              Most weekends, he can be found cataloguing his collection of rodent skeletons."</p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="col">
+        <aside class="profile-card">
+          <div class="mask-shadow" ></div>
+          <header>
+            <a>
+              <img src="{% static 'images/jack.jpeg' %}">
+            </a>
+            <h1>Tim O'neill</h1>
+            <h2>Graduated at the College of William and Mary</h2>
+          </header>
+          <div class="profile-bio">
+            <p>"Terence is an avid reader of science fiction, especially anything to do with aliens and tweed jackets.
+              Most weekends, he can be found cataloguing his collection of rodent skeletons."</p>
+          </div>
+        </aside>
+      </div>
+
+
+    </div>
+  </span>
+</div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load to_string %}
+
+
+{% load static %}
+
+{% block title %}Your Orders{% endblock %}
+
+
+{% block stylesheet%}
+<link href="{% static 'css/carousel.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+
+
+{% for appointment in appointments %}
+{% if forloop.first %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-3">{{ user.first_name }}'s Orders</h1>
+  {% comment %} <h2 class="display-4">Your Orders</h2> {% endcomment %}
+  <a href="{% url 'contact' %}" class="btn btn-outline-primary mt-4 mb-4">Contact us</a>
+</div>
+{% endif %}
+{% empty %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h2 class="display-4">Sorry {{ user.first_name }}, you don't have any orders yet</h2>
+  <a href="{% url 'schedule' %}" class="btn btn-lg btn-success mt-4 mb-4">Schedule</a>
+</div>
+{% endfor %}
+
+
+
+
+    <div class="container">
+      <div class="card-deck mb-3 text-center">
+      {% for appointment in appointments %}
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">{{ appointment.get_status_display}}</h4>
+          </div>
+          <div class="card-body">
+            {% comment %} <h1 class="card-title pricing-card-title">$25-35 <small class="text-muted">/ cubic yard</small></h1> {% endcomment %}
+            <ul class="list-unstyled mt-3 mb-4">
+              {% comment %} <li>{{ appointment.name }}</li>
+              <li>{{ appointment.email }}</li>
+              <li>{{ appointment.phone }}</li> {% endcomment %}
+              <li>{{ appointment.cubic_yards }} cubic yards</li>
+              <li>{% if appointment.weeding is True %}Weeding{% else %}No Weeding{% endif %}</li>
+              <li>{% if appointment.edging is True %}Edging{% else %}No Edging{% endif %}</li>
+              <li>{{ appointment.get_delivery_display }}</li>
+              <li>{{ appointment.address }}</li>
+
+              <li>{{ appointment.additional_comments }}</li>
+
+              <li>${{ appointment.cost }}</li>
+
+            </ul>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  {% endblock %}
+
