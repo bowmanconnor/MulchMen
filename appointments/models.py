@@ -12,6 +12,7 @@ class Appointment(models.Model):
     address = models.CharField(help_text="Not required until appointment is confirmed", max_length=50,  blank=True)
     cubic_yards = models.PositiveIntegerField(blank=False, help_text="$25-35/cu. yard")
     weeding = models.BooleanField(blank=False, help_text="$5/cu. yard")
+    bed_cleaning = models.BooleanField(blank=False, help_text="$5/cu. yard", default=False)
     edging = models.BooleanField(blank=False, help_text="$0.60/foot")
     delivery = models.CharField(max_length=1, choices=DELIVERY_CHOICES, default='P')
     date = models.DateField(auto_now=False, auto_now_add=False)

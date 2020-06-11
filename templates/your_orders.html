@@ -49,6 +49,7 @@
               <li>{{ appointment.phone }}</li> {% endcomment %}
               <li>{{ appointment.cubic_yards }} cubic yards</li>
               <li>{% if appointment.weeding is True %}Weeding{% else %}No Weeding{% endif %}</li>
+              <li>{% if appointment.bed_cleaning is True %}Bed Cleaning{% else %}No Bed Cleaning{% endif %}</li>
               <li>{% if appointment.edging is True %}Edging{% else %}No Edging{% endif %}</li>
               <li>{{ appointment.get_delivery_display }}</li>
               <li>{{ appointment.address }}</li>
