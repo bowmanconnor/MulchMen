@@ -3,14 +3,14 @@
 {% block title %}Sign up to MulchMen{% endblock %}
 
 {% block content %}
-
+{% comment %} 
     <div class="row">
       <div class="col text-center">
           <a href="{% url 'social:begin' 'facebook' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="fb connect mb-3">Continue with Facebook</a>
           <p class="mb-3">or</p> 
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 
   <div class="row justify-content-center">
     <div class="col-lg-8 col-md-10 col-sm-12 ml-4 mr-4 mb-4">
