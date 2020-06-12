@@ -85,7 +85,7 @@ class AppointmentUpdateView(UpdateView):
         appointment.save()
         return redirect('view_appointments')
 
-# @method_decorator(staff_member_required(login_url='home') , name='dispatch')
+@method_decorator(staff_member_required(login_url='home') , name='dispatch')
 class AppointmentDetailView(DetailView):
     model = Appointment
     template_name = 'view_appointment.html'
@@ -125,7 +125,7 @@ def complete_appointment(request, pk):
 
 
 
-
+@staff_member_required(login_url='home')
 def view_expenses(request):
     expenses = Expense.objects.all()
     return render(request, 'view_expenses.html', {'expenses' : expenses})

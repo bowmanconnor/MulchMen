@@ -7,7 +7,7 @@ class Appointment(models.Model):
     STATUS_CHOICES = [('P', 'Pending'), ('S', 'Scheduled'), ('C', 'Completed')]
     DELIVERY_CHOICES = [('P', 'I will set up the mulch delivery'), ('M', 'I would like MulchMen to set up the mulch delivery')]
     name = models.CharField(max_length=50, blank=False)
-    email = models.EmailField(max_length=254, blank=False)
+    email = models.EmailField(max_length=254, blank=True, default="example@example.com")
     phone = PhoneNumberField(region='US', blank=True, help_text="Not required")
     address = models.CharField(help_text="Not required until appointment is confirmed", max_length=50,  blank=True)
     cubic_yards = models.PositiveIntegerField(blank=False, help_text="$25-35/cu. yard")

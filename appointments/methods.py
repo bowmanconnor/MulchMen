@@ -32,6 +32,7 @@ def new_appointment(appointment):
         edging = "No Edging"
 
     message_to_broadcast = ("New Appointment \n"+
+        "--------------- \n" +
         appointment.name + "\n" +
         str(appointment.cubic_yards) + " cubic yards\n" +
         weeding + "\n" +
@@ -48,6 +49,7 @@ def new_appointment(appointment):
     for recipient in settings.SMS_BROADCAST_TO_NUMBERS:
         if recipient:
             client.messages.create(to=recipient, from_=settings.TWILIO_NUMBER, body=message_to_broadcast)
+            print("messgae sent to " + recipient)
             
 
 def add_appointment_sms(appointment, user_who_added):
@@ -75,6 +77,7 @@ def add_appointment_sms(appointment, user_who_added):
         edging = "No Edging"
 
     message_to_broadcast = (user_who_added + " added an appointment\n"+
+        "--------------- \n" +
         appointment.name + "\n" +
         str(appointment.cubic_yards) + " cubic yards\n" +
         status + "\n" +
@@ -95,23 +98,24 @@ def add_appointment_sms(appointment, user_who_added):
 
 
 def appointment_confirmed(appointment):
+    if appointment.email != "example@example.com":
+        subject = 'Your order has been confirmed!'
+        message = 'Hi '  + appointment.user.first_name + ',\n \nYour order has been confirmed! We cannot wait to transform your yard on ' + appointment.date.strftime("%A %B %d") +'. To view more of your appointment details click here mulchmen.org/orders/. If you have any further questions or concerns let us know. Thank you for your interest in MulchMen!\n\nThanks, \n\nMulchMen \nwww.mulchmen.org \nmulchmenmail@gmail.com \n(440) 539-3348'
+        recipient = appointment.user.email
+        send_mail(subject, message, EMAIL_HOST_USER, [recipient], fail_silently=False)
+        
+        client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
 
-    subject = 'Your order has been confirmed!'
-    message = 'Hi '  + appointment.user.first_name + ',\n \nYour order has been confirmed! We cannot wait to transform your yard on ' + appointment.date.strftime("%A %B %d") +'. To view more of your appointment details click here mulchmen.org/orders/. If you have any further questions or concerns let us know. Thank you for your interest in MulchMen!\n\nThanks, \n\nMulchMen \nwww.mulchmen.org \nmulchmenmail@gmail.com \n(440) 539-3348'
-    recipient = appointment.user.email
-    send_mail(subject, message, EMAIL_HOST_USER, [recipient], fail_silently=False)
-    
-    client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-
-    message_to_broadcast = ("\n"+
-        appointment.name + "'s appointment was confirmed" + "\n" + 
-        "mulchmen.org/appointments/")
-    for recipient in settings.SMS_BROADCAST_TO_NUMBERS:
-        if recipient:
-            client.messages.create(to=recipient, from_=settings.TWILIO_NUMBER, body=message_to_broadcast)
+        message_to_broadcast = ("\n"+
+            appointment.name + "'s appointment was confirmed" + "\n" + 
+            "mulchmen.org/appointments/")
+        for recipient in settings.SMS_BROADCAST_TO_NUMBERS:
+            if recipient:
+                client.messages.create(to=recipient, from_=settings.TWILIO_NUMBER, body=message_to_broadcast)
 
 def complete_appointment_email(appointment):
-    subject = 'Thank you for choosing MulchMen'
-    message = 'Hi '  + appointment.user.first_name + ',\n \nThank you for choosing us for your mulching needs this year! If you are pleased with how your yard turned out, any form of recommendation is how our little business stays alive! We thrive on your Facebook posts or when you tell your neighbors about us when they inevitably ask how your yard looks so darn good. Thank you once again and we hope you keep us in mind next summer. \n\nThanks, \n\nMulchMen \nwww.mulchmen.org \nmulchmenmail@gmail.com \n(440) 539-3348'
-    recipient = appointment.user.email
-    send_mail(subject, message, EMAIL_HOST_USER, [recipient], fail_silently=False)
+    if appointment.email != "example@example.com":
+        subject = 'Thank you for choosing MulchMen'
+        message = 'Hi '  + appointment.user.first_name + ',\n \nThank you for choosing us for your mulching needs this year! If you are pleased with how your yard turned out, any form of recommendation is how our little business stays alive! We thrive on your Facebook posts or when you tell your neighbors about us when they inevitably ask how your yard looks so darn good. Thank you once again and we hope you keep us in mind next summer. \n\nThanks, \n\nMulchMen \nwww.mulchmen.org \nmulchmenmail@gmail.com \n(440) 539-3348'
+        recipient = appointment.user.email
+        send_mail(subject, message, EMAIL_HOST_USER, [recipient], fail_silently=False)
