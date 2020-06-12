@@ -47,7 +47,7 @@ urlpatterns = [
 
 
 
-    path('oauth/complete/facebook/', include('social_django.urls', namespace='social')),
+    path('oauth/', include('social_django.urls', namespace='social')),
 
 
     path('signup/', accounts_views.signup, name='signup'),
