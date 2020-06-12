@@ -68,7 +68,6 @@ INSTALLED_APPS = [
     'social_django',
 
 
-    'bootstrap_datepicker_plus',
 
 
 ]
@@ -174,6 +173,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT =os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
 
 LOGOUT_REDIRECT_URL = 'home'
 
