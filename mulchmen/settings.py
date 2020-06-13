@@ -68,8 +68,7 @@ INSTALLED_APPS = [
     'social_django',
 
 
-    'bootstrap_datepicker_plus',
-
+   
 
 ]
 
@@ -158,7 +157,7 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 # add this
 
 SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.11'
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'oauth/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 SOCIAL_AUTH_BACKEND_ERROR_URL = '/'
 

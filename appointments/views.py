@@ -60,7 +60,6 @@ def schedule_staff(request):
         if form.is_valid():
             appointment = form.save(commit=False)
             appointment.save()
-            add_appointment_sms(appointment, request.user.first_name)
             return redirect('view_appointments')
     else:
         form = NewAppointmentStaffForm()

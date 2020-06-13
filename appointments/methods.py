@@ -92,10 +92,7 @@ def add_appointment_sms(appointment, user_who_added):
         str(appointment.phone) + "\n" +
         appointment.address + "\n\n" +
         "mulchmen.org/appointments/")
-    # for recipient in settings.SMS_BROADCAST_TO_NUMBERS:
-    #     if recipient:
-    #         client.messages.create(to=recipient, from_=settings.TWILIO_NUMBER, body=message_to_broadcast)
-
+   
 
 def appointment_confirmed(appointment):
     if appointment.email != "example@example.com":
