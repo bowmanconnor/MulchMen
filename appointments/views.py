@@ -67,7 +67,7 @@ def schedule_staff(request):
 
 @staff_member_required(login_url='home')
 def view_appointments(request):
-    appointments = Appointment.objects.order_by("-sumbitted_at")
+    appointments = Appointment.objects.order_by("-date")
     return render(request, 'view_appointments.html', {'appointments' : appointments})
     
 @method_decorator(staff_member_required(login_url='home') , name='dispatch')
