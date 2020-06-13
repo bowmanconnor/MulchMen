@@ -47,11 +47,9 @@ urlpatterns = [
 
 
 
-<<<<<<< HEAD
+
     path('', include('social_django.urls', namespace='social')),
-=======
     path('oauth/complete/facebook/', include('social_django.urls', namespace='social')),
->>>>>>> parent of e78acff... Facebook
 
 
     path('signup/', accounts_views.signup, name='signup'),

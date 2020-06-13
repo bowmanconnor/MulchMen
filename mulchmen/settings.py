@@ -68,11 +68,7 @@ INSTALLED_APPS = [
     'social_django',
 
 
-<<<<<<< HEAD
-   
-=======
 
->>>>>>> parent of e78acff... Facebook
 
 ]
 
@@ -141,7 +137,7 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
-SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.8'
+
 SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')
 SOCIAL_AUTH_FACEBOOK_SECRET =  config('SOCIAL_AUTH_FACEBOOK_SECRET')
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email'] # add this
@@ -153,14 +149,6 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 # add this
     ('email', 'email'),
 ]
 
-<<<<<<< HEAD
-SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.11'
-
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'oauth/'
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
-SOCIAL_AUTH_BACKEND_ERROR_URL = '/'
-=======
->>>>>>> parent of e78acff... Facebook
 
 
 # Internationalization
