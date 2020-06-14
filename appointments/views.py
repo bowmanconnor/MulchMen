@@ -30,13 +30,6 @@ def orders(request):
     appointments = Appointment.objects.filter(user=user)
     return render(request, 'your_orders.html', {'appointments' : appointments, 'user' : user })
 
-
-
-
-
-
-
-
 @login_required
 def schedule(request):
     if request.method == 'POST':
@@ -59,6 +52,7 @@ def schedule_staff(request):
         form = NewAppointmentStaffForm(request.POST)
         if form.is_valid():
             appointment = form.save(commit=False)
+            add_appointment_sms(appointment, request.user.first_name)
             appointment.save()
             return redirect('view_appointments')
     else:

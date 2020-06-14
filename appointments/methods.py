@@ -40,7 +40,6 @@ def new_appointment(appointment):
         edging + "\n" +
         appointment.date.strftime("%A %B %d") + "\n" +
         delivery + "\n" +
-        appointment.hear_about_us + "\n" +
         appointment.additional_comments + "\n" +
         appointment.email + "\n" +
         str(appointment.phone) + "\n" +
@@ -50,7 +49,7 @@ def new_appointment(appointment):
         if recipient:
             client.messages.create(to=recipient, from_=settings.TWILIO_NUMBER, body=message_to_broadcast)
             print("messgae sent to " + recipient)
-            
+
 
 def add_appointment_sms(appointment, user_who_added):
     client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
@@ -86,13 +85,16 @@ def add_appointment_sms(appointment, user_who_added):
         edging + "\n" +
         appointment.date.strftime("%A %B %d") + "\n" +
         delivery + "\n" +
-        appointment.hear_about_us + "\n" +
         appointment.additional_comments + "\n" +
         appointment.email + "\n" +
         str(appointment.phone) + "\n" +
         appointment.address + "\n\n" +
         "mulchmen.org/appointments/")
-   
+    for recipient in settings.SMS_BROADCAST_TO_NUMBERS:
+        if recipient:
+            client.messages.create(to=recipient, from_=settings.TWILIO_NUMBER, body=message_to_broadcast)
+            print("messgae sent to " + recipient)
+
 
 def appointment_confirmed(appointment):
     if appointment.email != "example@example.com":

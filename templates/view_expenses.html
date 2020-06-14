@@ -12,7 +12,7 @@
 
 {% block content %}
 
-
+<div>
 <table class="table mb-4">
     <thead class="thead-inverse">
       <tr class="table-warning">
@@ -30,15 +30,14 @@
           <td>{{ expense.amount }}</td>
           <td>{{ expense.purchaser }}</td>
           <td><a href="{% url 'view_expense' expense.pk %}" class="btn btn-outline-primary">View</a></td>
-
-          <td></td>
         </tr>
       {% endif %}
       {% endfor %}
     </tbody>
   </table>
+</div>
 
-
+<div>
 <table class="table mb-4">
     <thead class="thead-inverse">
       <tr class="table-success">
@@ -57,14 +56,12 @@
           <td>{{ expense.amount }}</td>
           <td>{{ expense.purchaser }}</td>
           <td><a href="{% url 'view_expense' expense.pk %}" class="btn btn-outline-primary">View</a></td>
-
-          <td></td>
         </tr>
       {% endif %}
       {% endfor %}
     </tbody>
   </table>
-
+</div>
 
 <div class="mb-4">
       <a href="{% url 'new_expense' %}" class="btn btn-primary">New expense</a>

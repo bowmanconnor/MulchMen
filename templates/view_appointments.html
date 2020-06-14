@@ -37,7 +37,7 @@
           <td>{{ appointment.date }}</td>
           <td><a href="{% url 'view_appointment' appointment.pk %}" class="btn btn-outline-primary">View</a></td>
 
-          <td></td>
+          
         </tr>
       {% endif %}
       {% endfor %}
@@ -62,8 +62,6 @@
           <td>{{ appointment.cubic_yards }}</td>
           <td>{{ appointment.date }}</td>
           <td><a href="{% url 'view_appointment' appointment.pk %}" class="btn btn-outline-primary">View</a></td>
-
-          <td></td>
         </tr>
       {% endif %}
       {% endfor %}
@@ -89,7 +87,6 @@
           <td>{{ appointment.date }}</td>
           <td><a href="{% url 'view_appointment' appointment.pk %}" class="btn btn-outline-primary">View</a></td>
 
-          <td></td>
         </tr>
       {% endif %}
       {% endfor %}
