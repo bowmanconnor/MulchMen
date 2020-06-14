@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% load static %}
+
+{% block title %}All Expenses{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item">Expenses</li>
+{% endblock %}
+
+{% block content %}
+
+<table class="table mb-4">
+    <thead class="thead-inverse">
+      <tr class="table-warning border-bottom border-secondary">
+        <th class="border-0">Name</th>
+        <th class="border-0">Amount</th>
+        <th class="border-0">Purchaser</th>
+        <th class="border-0">View</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for expense in expenses %}
+      {% if not expense.paid %}
+        <tr style="background-color:#ffdede;">
+          <td class="border-0">{{ expense.expense }}</td>
+          <td class="border-0">{{ expense.amount }}</td>
+          <td class="border-0">{{ expense.purchaser }}</td>
+          <td class="border-0"><a href="{% url 'view_expense' expense.pk %}" class="btn btn-outline-primary">View</a></td>
+        </tr>
+      {% endif %}
+      {% endfor %}
+      <thead class="thead-inverse">
+      <tr class="table-warning border-bottom border-top border-secondary">
+        <th class="border-0">Name</th>
+        <th class="border-0">Amount</th>
+        <th class="border-0">Purchaser</th>
+        <th class="border-0">View</th>
+      </tr>
+    </thead>
+      {% for expense in expenses %}
+      {% if expense.paid %}
+       <tr style="background-color:#e0ffde;">
+          <td class="border-0">{{ expense.expense }}</td>
+          <td class="border-0">{{ expense.amount }}</td>
+          <td class="border-0">{{ expense.purchaser }}</td>
+          <td class="border-0"><a href="{% url 'view_expense' expense.pk %}" class="btn btn-outline-primary">View</a></td>
+        </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+<div class="mb-4">
+      <a href="{% url 'new_expense' %}" class="btn btn-primary">New expense</a>
+    </div>
+
+{% endblock %}
+

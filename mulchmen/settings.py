@@ -153,6 +153,7 @@ SOCIAL_AUTH_PIPELINE = (
 
 SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')
 SOCIAL_AUTH_FACEBOOK_SECRET =  config('SOCIAL_AUTH_FACEBOOK_SECRET')
+SOCIAL_AUTH_URL_NAMESPACE ='social'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email'] # add this
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       # add this
   'fields': 'id, name, email'
@@ -191,12 +192,12 @@ STATICFILES_DIRS = [
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT =os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
 
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_URL = 'logout'
 
 
-
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
 SOCIAL_AUTH_STRATEGY = 'social_django.strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social_django.models.DjangoStorage'
 
@@ -211,7 +212,3 @@ EMAIL_PORT=587
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-
-LOGIN_URL = 'login'
-
-LOGOUT_URL = 'logout'
