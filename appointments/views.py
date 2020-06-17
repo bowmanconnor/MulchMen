@@ -1,6 +1,7 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Appointment, Expense
-from .forms import NewAppointmentStaffForm, NewAppointmentUserForm, NewExpenseForm
+from .forms import NewAppointmentStaffForm, NewAppointmentUserForm, NewExpenseForm,  NewAppointmentGuestForm
 from django.views.generic import UpdateView, DetailView, DeleteView
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -30,21 +31,36 @@ def orders(request):
     appointments = Appointment.objects.filter(user=user)
     return render(request, 'your_orders.html', {'appointments' : appointments, 'user' : user })
 
-@login_required
+
 def schedule(request):
     if request.method == 'POST':
-        form = NewAppointmentUserForm(request.POST)
-        if form.is_valid():
-            appointment = form.save(commit=False)
-            appointment.name = request.user.first_name + " " + request.user.last_name
-            appointment.email = request.user.email
-            appointment.user = request.user
-            appointment.save()
-            new_appointment(appointment)
-            return redirect('profile')
+        if request.user.is_authenticated:
+            form = NewAppointmentUserForm(request.POST)
+            if form.is_valid():
+                appointment = form.save(commit=False)
+                appointment.name = request.user.first_name + " " + request.user.last_name
+                appointment.email = request.user.email
+                appointment.user = request.user
+                appointment.save()
+                new_appointment(appointment)
+                return redirect('profile')
+        else:
+            form = NewAppointmentGuestForm(request.POST)
+            if form.is_valid():
+                appointment = form.save(commit=False)
+                appointment.user = None
+                appointment.save()
+                new_appointment(appointment)
+                return redirect('home')#add you arent guest page
     else:
-        form = NewAppointmentUserForm()
+        if request.user.is_authenticated:
+            form = NewAppointmentUserForm()
+        else: 
+            form = NewAppointmentGuestForm()
+
     return render(request, 'schedule.html', {'form': form})
+
+
 
 @staff_member_required(login_url='home')
 def schedule_staff(request):

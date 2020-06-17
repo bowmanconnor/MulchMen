@@ -27,7 +27,7 @@ urlpatterns = [
     path('orders/', views.orders, name='profile'),
     path('settings/account/', accounts_views.UserUpdateView.as_view(), name='edit_account'),
     path('contact/', views.contact, name='contact'),
-
+    path('social-auth/', include('social_django.urls', namespace="social")),
 
     path('schedule/', views.schedule, name='schedule'),
     path('staff_schedule/', views.schedule_staff, name='schedule_staff'),
@@ -47,7 +47,6 @@ urlpatterns = [
 
 
 
-    path('', include('social_django.urls', namespace='social')),
 
 
     path('signup/', accounts_views.signup, name='signup'),

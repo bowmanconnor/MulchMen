@@ -12,6 +12,13 @@ class NewAppointmentUserForm(forms.ModelForm):
         model = Appointment
         exclude = ['name', 'email', 'status', 'cost', 'submitted_at', 'user', 'key']
 
+class NewAppointmentGuestForm(forms.ModelForm):
+    date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+
+    class Meta:
+        model = Appointment
+        exclude = ['status', 'cost', 'submitted_at', 'user', 'key']
+
 class NewAppointmentStaffForm(forms.ModelForm):
     date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
 

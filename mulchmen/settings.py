@@ -61,12 +61,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
 
-    'appointments',
     'phonenumber_field',
 
     'widget_tweaks',
     'social_django',
-
+    'appointments',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -162,7 +162,7 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 # add this
     ('name', 'name'),
     ('email', 'email'),
 ]
-
+SOCIAL_AUTH_RAISE_EXCEPTIONS = True
 
 
 # Internationalization
