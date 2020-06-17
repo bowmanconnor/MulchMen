@@ -25,6 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('about/', views.about, name='about'),
     path('orders/', views.orders, name='profile'),
+    path('thankyou/', views.thankyou, name='thankyou'),
+
     path('settings/account/', accounts_views.UserUpdateView.as_view(), name='edit_account'),
     path('contact/', views.contact, name='contact'),
     path('social-auth/', include('social_django.urls', namespace="social")),

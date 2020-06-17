@@ -7,6 +7,7 @@ class DateInput(forms.DateInput):
 
 class NewAppointmentUserForm(forms.ModelForm):
     date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    email = forms.EmailField(required=True)
 
     class Meta:
         model = Appointment
@@ -14,7 +15,7 @@ class NewAppointmentUserForm(forms.ModelForm):
 
 class NewAppointmentGuestForm(forms.ModelForm):
     date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
-
+    email = forms.EmailField(required=True)
     class Meta:
         model = Appointment
         exclude = ['status', 'cost', 'submitted_at', 'user', 'key']

@@ -97,7 +97,7 @@ def add_appointment_sms(appointment, user_who_added):
 
 
 def appointment_confirmed(appointment):
-    if appointment.email != "example@example.com":
+    if appointment.email:
         subject = 'Your order has been confirmed!'
         message = 'Hi '  + appointment.user.first_name + ',\n \nYour order has been confirmed! We cannot wait to transform your yard on ' + appointment.date.strftime("%A %B %d") +'. To view more of your appointment details click here mulchmen.org/orders/. If you have any further questions or concerns let us know. Thank you for your interest in MulchMen!\n\nThanks, \n\nMulchMen \nwww.mulchmen.org \nmulchmenmail@gmail.com \n(440) 539-3348'
         recipient = appointment.user.email
@@ -113,7 +113,7 @@ def appointment_confirmed(appointment):
                 client.messages.create(to=recipient, from_=settings.TWILIO_NUMBER, body=message_to_broadcast)
 
 def complete_appointment_email(appointment):
-    if appointment.email != "example@example.com":
+    if appointment.email:
         subject = 'Thank you for choosing MulchMen'
         message = 'Hi '  + appointment.user.first_name + ',\n \nThank you for choosing us for your mulching needs this year! If you are pleased with how your yard turned out, any form of recommendation is how our little business stays alive! We thrive on your Facebook posts or when you tell your neighbors about us when they inevitably ask how your yard looks so darn good. Thank you once again and we hope you keep us in mind next summer. \n\nThanks, \n\nMulchMen \nwww.mulchmen.org \nmulchmenmail@gmail.com \n(440) 539-3348'
         recipient = appointment.user.email

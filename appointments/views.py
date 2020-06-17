@@ -25,6 +25,10 @@ def about(request):
 def contact(request):
     return render(request, 'contact.html')
 
+def thankyou(request):
+    return render(request, 'thankyou.html')
+
+
 @login_required
 def orders(request):
     user = request.user
