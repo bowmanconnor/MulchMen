@@ -9,7 +9,7 @@ class Appointment(models.Model):
     name = models.CharField(max_length=50, blank=False)
     email = models.EmailField(max_length=254, blank=True, default="example@example.com")
     phone = PhoneNumberField(region='US', blank=True, help_text="Not required")
-    address = models.CharField(help_text="Not required until appointment is confirmed", max_length=50,  blank=True)
+    address = models.CharField(max_length=50,  blank=False)
     cubic_yards = models.PositiveIntegerField(blank=False, help_text="$25-35/cu. yard")
     weeding = models.BooleanField(blank=False, help_text="$5/cu. yard")
     bed_cleaning = models.BooleanField(blank=False, help_text="$5/cu. yard", default=False)
