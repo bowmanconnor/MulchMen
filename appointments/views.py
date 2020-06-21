@@ -27,6 +27,7 @@ def contact(request):
 
 def thankyou(request):
     return render(request, 'thankyou.html')
+    
 
 
 @login_required
@@ -63,7 +64,6 @@ def schedule(request):
             form = NewAppointmentGuestForm()
 
     return render(request, 'schedule.html', {'form': form})
-
 
 
 @staff_member_required(login_url='home')
