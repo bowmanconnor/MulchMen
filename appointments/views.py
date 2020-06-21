@@ -55,7 +55,7 @@ def schedule(request):
                 appointment.user = None
                 appointment.save()
                 new_appointment(appointment)
-                return redirect('home')#add you arent guest page
+                return redirect('thankyou')#add you arent guest page
     else:
         if request.user.is_authenticated:
             form = NewAppointmentUserForm()
