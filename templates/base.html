@@ -31,9 +31,10 @@
       {% if user.is_staff %}
       <div class="collapse navbar-collapse" id="mainMenu">
         <div class="navbar-nav">
-          <a class="nav-item nav-link" href="{% url 'view_appointments' %}">Appointments<span
-              class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="{% url 'view_appointments' %}">Appointments</a>
           <a class="nav-item nav-link" href="{% url 'view_expenses' %}">Expenses</a>
+          <a class="nav-item nav-link" href="{% url 'money' %}">Money Breakdown</a>
+
         </div>
       {% else %}
         <div class="collapse navbar-collapse" id="mainMenu">

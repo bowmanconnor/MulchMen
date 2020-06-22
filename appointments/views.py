@@ -27,6 +27,21 @@ def contact(request):
 
 def thankyou(request):
     return render(request, 'thankyou.html')
+
+@staff_member_required(login_url='home')
+def money(request):
+    revenue = 0
+    appointments = Appointment.objects.all()
+    for appointment in appointments:
+        revenue += (appointment.cost)
+
+    e = 0
+    expenses = Expense.objects.all()
+    for expense in expenses:
+        e += (expense.amount)
+
+    profit = revenue - e
+    return render(request, 'money.html', {'revenue' : revenue, 'expense' : e, "profit" : profit })
     
 
 

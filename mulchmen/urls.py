@@ -26,6 +26,8 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('orders/', views.orders, name='profile'),
     path('thankyou/', views.thankyou, name='thankyou'),
+    path('money/', views.money, name='money'),
+
 
     path('settings/account/', accounts_views.UserUpdateView.as_view(), name='edit_account'),
     path('contact/', views.contact, name='contact'),

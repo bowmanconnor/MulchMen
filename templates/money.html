@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Money{% endblock %}
+
+{% block stylesheet%}
+<link href="{% static 'css/carousel.css' %}" rel="stylesheet">
+<link href="{% static 'css/pricing.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+<!-- Contact -->
+<div class="pricing-header mx-auto text-center">
+    <h1 class="display-4">Revenue</h1>
+    <p class="lead">${{revenue}}</p>
+</div>
+
+<div class="pricing-header mx-auto text-center">
+    <h1 class="display-4">Expenses</h1>
+    <p class="lead">${{expense}}</p>
+</div>
+
+<div class="pricing-header mx-auto text-center">
+    <h1 class="display-4">Profit</h1>
+    <p class="lead">${{ profit }}</p>
+</div>
+
+
+
+    {% endblock %}
