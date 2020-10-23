@@ -31,7 +31,7 @@ def thankyou(request):
 @staff_member_required(login_url='home')
 def money(request):
     revenue = 0
-    appointments = Appointment.objects.all()
+    appointments = Appointment.objects.order_by("-date")
     for appointment in appointments:
         revenue += (appointment.cost)
 
@@ -41,8 +41,8 @@ def money(request):
         e += (expense.amount)
 
     profit = revenue - e
-    return render(request, 'money.html', {'revenue' : revenue, 'expense' : e, "profit" : profit })
-    
+    return render(request, 'money.html', {'revenue' : revenue, 'expense' : e, "profit" : profit, 'appointments' : appointments })
+
 
 
 @login_required
@@ -102,7 +102,7 @@ def view_appointments(request):
 @method_decorator(staff_member_required(login_url='home') , name='dispatch')
 class AppointmentUpdateView(UpdateView):
     model = Appointment
-    fields = ('name', 'email', 'phone', 'address', 'address', 'weeding', 'edging', 'delivery', 'date', 'status', 'cost', 'hear_about_us', 'additional_comments',)
+    fields = ('name', 'email', 'phone', 'address', 'cubic_yards', 'weeding', 'edging', 'delivery', 'date', 'status', 'cost', 'hear_about_us', 'additional_comments',)
 
     template_name = 'edit_appointment.html'
     pk_url_kwarg = 'pk'

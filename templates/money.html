@@ -10,21 +10,42 @@
 {% block body %}
 
 <!-- Contact -->
-<div class="pricing-header mx-auto text-center">
-    <h1 class="display-4">Revenue</h1>
-    <p class="lead">${{revenue}}</p>
+<!-- Contact -->
+<div class="row">
+    <div class="col">
+        <div class="pricing-header mx-auto text-center">
+            <h1 class="display-4">Revenue</h1>
+            <p class="lead">${{revenue}}</p>
+        </div>
+
+        <div class="pricing-header mx-auto text-center">
+            <h1 class="display-4">Expenses</h1>
+            <p class="lead">${{expense}}</p>
+        </div>
+
+        <div class="pricing-header mx-auto text-center">
+            <h1 class="display-4">Profit</h1>
+            <p class="lead">${{ profit }}</p>
+        </div>
+	<div class="pricing-header mx-auto text-center">
+            <h1 class="display-4">Total Appointments</h1>
+            <p class="lead">{{ appointments.count  }}</p>
+        </div>
+
+    </div>
+    <div class="col">
+        <div class="pricing-header mx-auto text-center">
+            <h1 class="display-4">Appointments</h1>
+            {% for appointment in appointments %}
+            <p><a href="{% url 'edit_appointment' appointment.pk %}" class="">{{ appointment.name }}</a></p>            
+            <p>{{ appointment.cubic_yards }} cubic yards</p>
+            <p>${{ appointment.cost }}</p>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 
-<div class="pricing-header mx-auto text-center">
-    <h1 class="display-4">Expenses</h1>
-    <p class="lead">${{expense}}</p>
-</div>
-
-<div class="pricing-header mx-auto text-center">
-    <h1 class="display-4">Profit</h1>
-    <p class="lead">${{ profit }}</p>
-</div>
 
 
 
-    {% endblock %}
+{% endblock %}
